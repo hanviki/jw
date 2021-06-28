@@ -18,6 +18,7 @@
         </el-form-item>
         <el-form-item label="所属岗位">
           <PostList
+            ref="postList"
             @childSelectDepartment="getSelectStation"
             :selectedOptions="stationcode"
           ></PostList>
@@ -94,11 +95,11 @@ export default {
       indicatorOptions: [
         {
           value: "0",
-          label: "基础量化指标"
+          label: "基础指标"
         },
         {
           value: "1",
-          label: "关键量化指标"
+          label: "岗位职责指标"
         }
       ],
       form: {},
@@ -131,6 +132,7 @@ export default {
       this.score.b = "";
       this.score.c = "";
       this.score.d = "";
+      this.form={}
     },
     //获取部门选择
     getSelectStation(data, row) {
@@ -205,15 +207,15 @@ export default {
     //指标类型改变
     typeChange(val) {
       if (val == "1") {
-        this.form.ascore = "14-16";
-        this.form.bscore = "10-13";
-        this.form.cscore = "8-9";
-        this.form.dscore = "1-7";
+        this.form.ascore = "3";
+        this.form.bscore = "2";
+        this.form.cscore = "1";
+        this.form.dscore = "0";
       } else if (val == "0") {
-        this.form.ascore = "4";
-        this.form.bscore = "3";
-        this.form.cscore = "2";
-        this.form.dscore = "1";
+        this.form.ascore = "3";
+        this.form.bscore = "2";
+        this.form.cscore = "1";
+        this.form.dscore = "0";
       }
     }
   },

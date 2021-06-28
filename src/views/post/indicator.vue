@@ -235,8 +235,8 @@ export default {
       } else {
         this.forms.stationcode = "";
       }
-      this.forms.fullstationcode = this.fullstationcode.join(",");
-      this.stationcode = this.fullstationcode;
+     // this.forms.fullstationcode = this.fullstationcode.join(",");
+      this.stationcode = [""];
       this.dialogVisible = true;
     },
     //删除岗位

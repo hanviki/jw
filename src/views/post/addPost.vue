@@ -17,6 +17,47 @@
         <el-form-item label="岗位名称">
           <el-input v-model="form.stationname"></el-input>
         </el-form-item>
+        <el-form-item label="直接上级">
+          <el-input v-model="form.relation1"></el-input>
+        </el-form-item>
+        <el-form-item label="直接下级">
+          <el-input v-model="form.relation2"></el-input>
+        </el-form-item>
+       <el-form-item label="性别">
+          <el-select
+            v-model="form.station1"
+            placeholder="请选择"
+          >
+            <el-option
+              v-for="item in sex"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="年龄">
+          <el-input v-model="form.station2"></el-input>
+        </el-form-item>
+        <el-form-item label="学历">
+          <el-input v-model="form.xueli"></el-input>
+        </el-form-item>
+        <el-form-item label="专业">
+          <el-input v-model="form.peixun"></el-input>
+        </el-form-item>
+        <el-form-item label="执业资格">
+          <el-input v-model="form.zhiyezige"></el-input>
+        </el-form-item>
+        <el-form-item label="工作经验">
+          <el-input v-model="form.gongzuojingyan"></el-input>
+        </el-form-item>
+          <el-form-item label="关键知识">
+          <el-input v-model="form.gexingtezheng"></el-input>
+        </el-form-item>
+          <el-form-item label="核心技能">
+          <el-input v-model="form.jibenjineng"></el-input>
+        </el-form-item>
         <el-form-item label="岗位描述">
           <!-- <el-input
             type="textarea"
@@ -55,6 +96,16 @@ import Ckeditor from "../common/ckeditor";
 export default {
   data() {
     return {
+      sex: [
+        {
+          value: "男",
+          label: "男"
+        },
+        {
+          value: "女",
+          label: "女"
+        }
+      ],
       form:{},
       selfDialogVisible: this.dialogVisible
     };

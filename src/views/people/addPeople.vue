@@ -15,14 +15,14 @@
         class="table-expand"
       >
         <el-form-item
-          label="发薪号"
+          label="工号"
           :rules="[
               { required: true},
             ]"
         >
           <el-input
             v-model="form.moneycard"
-            placeholder="请输入发薪号"
+            placeholder="请输入工号"
             @input="selectUser"
           ></el-input>
         </el-form-item>
@@ -41,7 +41,6 @@
         <el-form-item
           label="手机号码"
           :rules="[
-              { required: true},
             ]"
         >
           <el-input
@@ -142,12 +141,12 @@
             :selectedOptions="tempstationcode"
           ></PostList>
         </el-form-item>
-        <el-form-item label="所属支部">
+        <!-- <el-form-item label="所属支部">
           <BranchList
             @childSelectBranch="getSelectBranch"
             :selectedOptions="tempbranchcode"
           ></BranchList>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
       <span
         slot="footer"
@@ -334,10 +333,13 @@ export default {
         this.$message.warning("请选择角色权限");
         return;
       }
+       if (this.form.mobile) {
       if (!this.common.isPoneAvailable(this.form.mobile)) {
         this.$message.warning("请填写正确的手机号码");
         return;
       }
+      
+       }
       if (this.form.email) {
         if (!this.common.isEmailAvailable(this.form.email)) {
           this.$message.warning("请填写正确的邮箱");

@@ -35,6 +35,9 @@ export default {
     this.selfSelectedOptions = this.selectedOptions;
   },
   methods: {
+    reset () {
+         this.selfSelectedOptions = [""]
+    },
     //获取岗位列表
     getStationList() {
       new Promise((response, reject) => {

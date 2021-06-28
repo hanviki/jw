@@ -57,11 +57,11 @@
               :disabled="saveDisabled"
               @click="addDepartment"
             >保存修改</el-button>
-            <el-button
+            <!-- <el-button
               type="warning"
               :disabled="delDisabled"
               @click="openSubdivision"
-            >添加子部门</el-button>
+            >添加子部门</el-button> -->
             <el-button
               type="danger"
               :disabled="delDisabled"
