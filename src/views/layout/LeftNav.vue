@@ -63,7 +63,7 @@
       >
         <template slot="title">
           <i class="el-icon-s-check"></i>
-          <span>季结管理</span>
+          <span>月结管理</span>
         </template>
         <router-link to="/home/scorePeople">
           <el-menu-item index="/home/scorePeople">评分关系管理</el-menu-item>
@@ -75,7 +75,7 @@
           <el-menu-item index="/home/historyGrade">历史评分管理</el-menu-item>
         </router-link>
         <router-link to="/home/quarter">
-          <el-menu-item index="/home/quarter">季度总结管理</el-menu-item>
+          <el-menu-item index="/home/quarter">月度总结管理</el-menu-item>
         </router-link>
         <router-link to="/home/leaderUser">
           <el-menu-item index="/home/leaderUser">打分用户管理</el-menu-item>
@@ -105,7 +105,7 @@
       <router-link to="/home/userQuarter" v-if="role != '150'">
         <el-menu-item index="/home/userQuarter">
           <i class="iconfont icon-weibiaoti12"></i>
-          <span slot="title">个人季结管理</span>
+          <span slot="title">个人月结管理</span>
         </el-menu-item>
       </router-link>
       <template v-if="role == 300">

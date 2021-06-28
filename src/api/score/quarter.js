@@ -1,7 +1,7 @@
 import fetch from '@/utils/fetch'
 
 
-//查询季节总结接口
+//查询月节总结接口
 export function getList(data) {
     return fetch({
         url: 'quarter/list',
@@ -9,7 +9,7 @@ export function getList(data) {
         data: data
     })
 }
-//批量季结提交接口
+//批量月结提交接口
 export function updateSummarySubmitState(data) {
     return fetch({
         url: 'quarter/updateSummarySubmitState',
@@ -17,7 +17,7 @@ export function updateSummarySubmitState(data) {
         data: data
     })
 }
-//批量修改季结评分状态接口
+//批量修改月结评分状态接口
 export function updateSummaryGradeState(data) {
     return fetch({
         url: 'quarter/updateSummaryGradeState',
@@ -25,14 +25,14 @@ export function updateSummaryGradeState(data) {
         data: data
     })
 }
-//全部修改季节评分状态接口
+//全部修改月节评分状态接口
 export function updateSummaryGradeStateAll() {
     return fetch({
         url: 'quarter/updateSummaryGradeStateAll',
         method: 'post'
     })
 }
-//是否确认开启新的季度考核接口
+//是否确认开启新的月度考核接口
 export function isAllFinish(data) {
     return fetch({
         url: 'manualSetTime/isAllFinish',

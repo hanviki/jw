@@ -9,7 +9,7 @@ export function getList(data) {
         data: data
     })
 }
-//批量修改季结评分完成状态接口
+//批量修改月结评分完成状态接口
 export function updateFinishGradeBySerialNo(data) {
     return fetch({
         url: 'history/updateFinishGradeBySerialNo',
@@ -17,7 +17,7 @@ export function updateFinishGradeBySerialNo(data) {
         data: data
     })
 }
-//全部修改季节评分完成状态接口
+//全部修改月节评分完成状态接口
 export function updateFinishGradeAll() {
     return fetch({
         url: 'history/updateFinishGradeAll',

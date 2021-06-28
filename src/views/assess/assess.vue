@@ -102,7 +102,7 @@
             ><a>{{detailData.filename}}</a></div>
           </li>
           <li class="w100">
-            <div class="label">季结内容:</div>
+            <div class="label">月结内容:</div>
             <div
               class="value"
               v-html="detailData.content"

@@ -40,7 +40,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="季度">
+            <el-form-item label="月度">
               <el-select
                 v-model="search.month"
                 clearable
@@ -60,7 +60,7 @@
             :span="6"
             style="margin-top:20px;"
           >
-            <el-form-item label="季结状态">
+            <el-form-item label="月结状态">
               <el-select
                 v-model="search.state"
                 clearable
@@ -166,13 +166,13 @@
         >
         </el-table-column>
         <el-table-column
-          label="季结状态"
+          label="月结状态"
           prop="statename"
           show-overflow-tooltip
         >
         </el-table-column>
         <el-table-column
-          label="季结季度"
+          label="月结月度"
           prop="statename"
           show-overflow-tooltip
         >
@@ -211,7 +211,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="季结修改/查看"
+          label="月结修改/查看"
           align="center"
         >
           <template slot-scope="scope">
@@ -234,7 +234,7 @@
       >
       </el-pagination>
     </el-row>
-    <!-- 添加季结 -->
+    <!-- 添加月结 -->
     <AddQuarter
       :parentForms="forms"
       :dialogVisible="dialogVisible"
@@ -266,7 +266,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="季度">
+            <el-form-item label="月度">
               <el-select
                 v-model="exportNot.month"
                 clearable
@@ -309,19 +309,19 @@ export default {
       quarterOptions: [
         {
           value: "1",
-          label: "第一季度",
+          label: "第一月度",
         },
         {
           value: "2",
-          label: "第二季度",
+          label: "第二月度",
         },
         {
           value: "3",
-          label: "第三季度",
+          label: "第三月度",
         },
         {
           value: "4",
-          label: "第四季度",
+          label: "第四月度",
         },
       ],
       status: [
@@ -335,15 +335,15 @@ export default {
         },
         {
           value: "5",
-          label: "季结待提交",
+          label: "月结待提交",
         },
         {
           value: "6",
-          label: "季结评分",
+          label: "月结评分",
         },
         {
           value: "7",
-          label: "季结评分完成",
+          label: "月结评分完成",
         },
       ],
       gradeStatus: [
@@ -397,11 +397,11 @@ export default {
     this.getList();
   },
   methods: {
-    //关闭季结
+    //关闭月结
     childClose(val) {
       this.dialogVisible = val;
     },
-    //打开季结
+    //打开月结
     openAdd(row) {
       this.forms = {
         serialno: row.serialno,
@@ -490,7 +490,7 @@ export default {
         return;
       }
       if(!this.exportNot.month){
-        this.$message.warning("请选择季度");
+        this.$message.warning("请选择月度");
         return;
       }
       window.location.href =

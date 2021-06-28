@@ -317,7 +317,7 @@ export default {
       this.messageType = type;
       this.messageDialogVisible = true;
     },
-    //关闭季结
+    //关闭月结
     childClose(val) {
       this.messageDialogVisible = val;
     },

@@ -40,7 +40,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="季度">
+            <el-form-item label="月度">
               <el-select
                 v-model="search.month"
                 clearable
@@ -91,7 +91,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="打分季度"
+          label="打分月度"
           prop="statename"
           show-overflow-tooltip
         >
@@ -161,19 +161,19 @@ export default {
       seasonOptions: [
         {
           value: "1",
-          label: "第一季度"
+          label: "第一月度"
         },
         {
           value: "2",
-          label: "第二季度"
+          label: "第二月度"
         },
         {
           value: "3",
-          label: "第三季度"
+          label: "第三月度"
         },
         {
           value: "4",
-          label: "第四季度"
+          label: "第四月度"
         }
       ],
       quarterOptions: [
@@ -187,15 +187,15 @@ export default {
         },
         {
           value: "5",
-          label: "季结待提交"
+          label: "月结待提交"
         },
         {
           value: "6",
-          label: "季结评分"
+          label: "月结评分"
         },
         {
           value: "7",
-          label: "季结评分完成"
+          label: "月结评分完成"
         }
       ],
       search: {
@@ -258,7 +258,7 @@ export default {
         params.month = this.search.month;
         params.year = this.search.year;
       }else{
-        this.$message.warning("年份和季度请同时选择");
+        this.$message.warning("年份和月度请同时选择");
         return;
       }
       new Promise((response, reject) => {

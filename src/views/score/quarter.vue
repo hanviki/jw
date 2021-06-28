@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 class="title">
-      <router-link to="/home"><span>首页</span></router-link><i class="el-icon-arrow-right"></i>季度总结管理
+      <router-link to="/home"><span>首页</span></router-link><i class="el-icon-arrow-right"></i>月度总结管理
     </h4>
     <el-row class="search">
       <el-col>
@@ -21,7 +21,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item label="季结状态">
+            <el-form-item label="月结状态">
               <el-select
                 v-model="search.state"
                 clearable
@@ -50,15 +50,15 @@
         <el-button
           type="primary"
           @click="updateSubmit"
-        >批量修改季结提交</el-button>
+        >批量修改月结提交</el-button>
         <el-button
           type="primary"
           @click="updateGrade"
-        >批量修改季结评分</el-button>
+        >批量修改月结评分</el-button>
         <el-button
           type="warning"
           @click="updateAllStatus"
-        >全部季结评分</el-button>
+        >全部月结评分</el-button>
         <el-button
           type="danger"
           @click="openMessage(1)"
@@ -113,7 +113,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="季结季度"
+          label="月结月度"
           show-overflow-tooltip
         >
           <template slot-scope="scope">
@@ -122,7 +122,7 @@
         </el-table-column>
         <el-table-column
           prop="statename"
-          label="季结状态"
+          label="月结状态"
           show-overflow-tooltip
         >
         </el-table-column>
@@ -139,7 +139,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="季结修改/查看"
+          label="月结修改/查看"
           align="center"
         >
           <template slot-scope="scope">
@@ -183,7 +183,7 @@
       :messageDialogVisible="messageDialogVisible"
       :messageType="messageType"
     ></MessageCheck>
-    <!-- 修改季结 -->
+    <!-- 修改月结 -->
     <AddQuarter
       :parentForms="forms"
       :dialogVisible="dialogVisible"
@@ -288,25 +288,25 @@ export default {
         },
         {
           value: "5",
-          label: "季结待提交"
+          label: "月结待提交"
         },
         {
           value: "6",
-          label: "季结评分"
+          label: "月结评分"
         },
         {
           value: "7",
-          label: "季结评分完成"
+          label: "月结评分完成"
         }
       ],
       statusOptions: [
         {
           value: "5",
-          label: "季结提交"
+          label: "月结提交"
         },
         {
           value: "6",
-          label: "季结评分"
+          label: "月结评分"
         }
       ],
       gradeStatus: [
@@ -367,12 +367,12 @@ export default {
     handleClose() {
       this.statusDialogVisible = false;
     },
-    //关闭季结
+    //关闭月结
     childClose(val) {
       this.dialogVisible = val;
       this.messageDialogVisible = val;
     },
-    //打开季结
+    //打开月结
     openAdd(row) {
       this.forms = {
         serialno: row.serialno,
@@ -436,12 +436,12 @@ export default {
       this.search.stationcode.push(data);
       this.fullstationcode = row;
     },
-    //打开季结状态
+    //打开月结状态
     openStatus(row) {
       this.tempStatusRow = row;
       this.statusDialogVisible = true;
     },
-    //修改季结状态
+    //修改月结状态
     updateStatus() {
       if (!this.status) {
         this.$message.warning("请选择状态");
@@ -471,9 +471,9 @@ export default {
       });
       this.statusDialogVisible = false;
     },
-    //全部季结评分
+    //全部月结评分
     updateAllStatus() {
-      this.$confirm("此操作将所有人季结状态改成季结评分, 是否继续?", "提示", {
+      this.$confirm("此操作将所有人月结状态改成月结评分, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -503,7 +503,7 @@ export default {
         })
         .catch(() => {});
     },
-    //批量修改季结提交
+    //批量修改月结提交
     updateSubmit() {
       if (this.checkBoxData.length <= 0) {
         this.$message.warning("请先勾选需要更改的数据");
@@ -516,7 +516,7 @@ export default {
       let data = {
         serialnos: tData.join(",")
       };
-      this.$confirm("此操作将季结状态改成季结提交, 是否继续?", "提示", {
+      this.$confirm("此操作将月结状态改成月结提交, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -546,7 +546,7 @@ export default {
         })
         .catch(() => {});
     },
-    //批量修改季结评分
+    //批量修改月结评分
     updateGrade() {
       if (this.checkBoxData.length <= 0) {
         this.$message.warning("请先勾选需要更改的数据");
@@ -559,7 +559,7 @@ export default {
       let data = {
         serialnos: tData.join(",")
       };
-      this.$confirm("此操作将季结状态改成季结评分, 是否继续?", "提示", {
+      this.$confirm("此操作将月结状态改成月结评分, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -605,7 +605,7 @@ export default {
         templatecontent: templatecode
       };
       this.$confirm(
-        "此操作将给所有人(不包含打分用户)发送考核开始的提醒短信，并且一个季度只能使用一次此功能，是否继续?",
+        "此操作将给所有人(不包含打分用户)发送考核开始的提醒短信，并且一个月度只能使用一次此功能，是否继续?",
         "提示",
         {
           confirmButtonText: "确定",

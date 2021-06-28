@@ -80,18 +80,18 @@ import indicator from '@/views/post/indicator.vue'
 //人员管理
 import people from '@/views/people/people.vue'
 
-//季结管理
+//月结管理
 import scorePeople from '@/views/score/scorePeople.vue'//评分关系管理
 import gradeUserList from '@/views/score/gradeUserList.vue'//设置各类评分人
 import byGradeUserList from '@/views/score/byGradeUserList.vue' // 设置被评分人
 import gradeTotal from '@/views/score/gradeTotal.vue'//评分汇总管理
 import historyGrade from '@/views/score/historyGrade.vue'//历史评分汇总
-import quarter from '@/views/score/quarter.vue'//季度总结管理
+import quarter from '@/views/score/quarter.vue'//月度总结管理
 import leaderUser from '@/views/score/leader.vue'//打分用户管理
 
 //用户模块
 import updatePsd from '@/views/user/updatePsd.vue' //修改密码
-import userQuarter from '@/views/user/quarter.vue' //个人季度总结
+import userQuarter from '@/views/user/quarter.vue' //个人月度总结
 import userGrade from '@/views/user/grade.vue' //个人评分
 
 //考核
@@ -337,7 +337,7 @@ export default new Router({
             component: historyGrade
         }, {
             path: 'quarter',
-            name: "季度总结管理",
+            name: "月度总结管理",
             component: quarter
         }, {
             path: 'leaderUser',
@@ -349,7 +349,7 @@ export default new Router({
             component: updatePsd,
         }, {
             path: 'userQuarter',
-            name: "个人季结管理",
+            name: "个人月结管理",
             component: userQuarter,
         }, {
             path: 'userGrade',

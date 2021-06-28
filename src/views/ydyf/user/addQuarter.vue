@@ -2,7 +2,7 @@
   <div>
 
     <!-- <el-dialog
-      title="季结管理"
+      title="月结管理"
       :visible.sync="dialogVisible"
       :before-close="cancel"
       width="50%"
