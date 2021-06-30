@@ -48,25 +48,21 @@
         <el-form-item label="优秀分值">
           <el-input
             v-model="form.ascore"
-            disabled
           ></el-input>
         </el-form-item>
         <el-form-item label="良好分值">
           <el-input
             v-model="form.bscore"
-            disabled
           ></el-input>
         </el-form-item>
         <el-form-item label="一般分值">
           <el-input
             v-model="form.cscore"
-            disabled
           ></el-input>
         </el-form-item>
         <el-form-item label="较差分值">
           <el-input
             v-model="form.dscore"
-            disabled
           ></el-input>
         </el-form-item>
 
@@ -100,6 +96,14 @@ export default {
         {
           value: "1",
           label: "岗位职责指标"
+        },
+        {
+          value: "2",
+          label: "重点任务"
+        },
+        {
+          value: "3",
+          label: "目标任务"
         }
       ],
       form: {},
