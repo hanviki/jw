@@ -34,7 +34,6 @@
             v-model="form.dutytype"
             placeholder="请选择"
             style="width:100%;"
-            @change="typeChange"
           >
             <el-option
               v-for="item in indicatorOptions"
@@ -95,7 +94,7 @@ export default {
         },
         {
           value: "1",
-          label: "岗位职责指标"
+          label: "岗位职责"
         },
         {
           value: "2",
@@ -210,7 +209,17 @@ export default {
     },
     //指标类型改变
     typeChange(val) {
-      if (val == "1") {
+      if (val == "3") {
+        this.form.ascore = "3";
+        this.form.bscore = "2";
+        this.form.cscore = "1";
+        this.form.dscore = "0";
+      } else if (val == "2") {
+        this.form.ascore = "3";
+        this.form.bscore = "2";
+        this.form.cscore = "1";
+        this.form.dscore = "0";
+      } else if (val == "1") {
         this.form.ascore = "3";
         this.form.bscore = "2";
         this.form.cscore = "1";

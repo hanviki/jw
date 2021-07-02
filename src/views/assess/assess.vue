@@ -71,7 +71,7 @@
             <div class="value">{{detailData.year}}</div>
           </li>
           <li>
-            <div class="label">季度:</div>
+            <div class="label">月度:</div>
             <div class="value">第{{detailData.month}}季度</div>
           </li>
           <!-- <li>
@@ -121,7 +121,7 @@
             v-if="historyTotal"
           >总分：<span style="color:#f00;">{{historyTotal}}</span></li>
           <li class="li-title">
-            <div class="title">基础量化指标(总分20)</div>
+            <div class="title">基础指标(总分15)</div>
           </li>
           <li
             v-for="(item,index) in dutyJichu"
@@ -149,10 +149,66 @@
             </div>
           </li>
           <li class="li-title">
-            <div class="title">关键量化指标(总分80)</div>
+            <div class="title">岗位职责(总分15)</div>
           </li>
           <li
             v-for="(item,index) in dutyYiban"
+            :key="index"
+          >
+            <div
+              class="label"
+              v-html="item.dutyname"
+            ></div>
+            <div class="value">
+              <div class="core">优秀({{item.ascore}})</div>
+              <div class="core">良好({{item.bscore}})</div>
+              <div class="core">一般({{item.cscore}})</div>
+              <div class="core">较差({{item.dscore}})</div>
+              <div class="core">
+                <el-input
+                  placeholder="请输入分数"
+                  v-model="item.score"
+                  clearable
+                  class="core-input"
+                  :disabled="detailData.isedit == 1 ? true : false"
+                >
+                </el-input>
+              </div>
+            </div>
+          </li>
+          <li class="li-title">
+            <div class="title">重点任务(总分25)</div>
+          </li>
+          <li
+            v-for="(item,index) in dutyZhongdian"
+            :key="index"
+          >
+            <div
+              class="label"
+              v-html="item.dutyname"
+            ></div>
+            <div class="value">
+              <div class="core">优秀({{item.ascore}})</div>
+              <div class="core">良好({{item.bscore}})</div>
+              <div class="core">一般({{item.cscore}})</div>
+              <div class="core">较差({{item.dscore}})</div>
+              <div class="core">
+                <el-input
+                  placeholder="请输入分数"
+                  v-model="item.score"
+                  clearable
+                  class="core-input"
+                  :disabled="detailData.isedit == 1 ? true : false"
+                >
+                </el-input>
+              </div>
+            </div>
+          </li>
+          <li class="li-title">
+            <div class="title">目标任务(总分30)</div>
+          </li>
+          <li
+            v-for="(item,index) in dutyMubiao"
             :key="index"
           >
             <div
@@ -299,21 +355,55 @@ export default {
     return {
       form: {},
       quarterOptions: [
-        {
+       {
           value: "1",
-          label: "第一季度"
+          label: "1月"
         },
         {
           value: "2",
-          label: "第二季度"
+          label: "2月"
         },
         {
           value: "3",
-          label: "第三季度"
+          label: "3月"
         },
         {
           value: "4",
-          label: "第四季度"
+          label: "4月"
+        },
+        {
+          value: "5",
+          label: "5月"
+        }
+        ,
+        {
+          value: "6",
+          label: "6月"
+        }
+        ,
+        {
+          value: "7",
+          label: "7月"
+        },
+        {
+          value: "8",
+          label: "8月"
+        },
+        {
+          value: "9",
+          label: "9月"
+        },
+        {
+          value: "10",
+          label: "10月"
+        },
+        {
+          value: "11",
+          label: "11月"
+        },
+        {
+          value: "12",
+          label: "12月"
         }
       ],
       totalScore: 0,
@@ -322,6 +412,8 @@ export default {
       detailData: {},
       dutyJichu: [],
       dutyYiban: [],
+      dutyZhongdian: [],
+      dutyMubiao: [],
       search: {
         year: "",
         month: ""
@@ -352,9 +444,13 @@ export default {
               this.form = response.data.data.stations;
               this.dutyJichu = [];
               this.dutyYiban = [];
+              this.dutyZhongdian = [];
+              this.dutyMubiao = [];
               this.dutyJichu = response.data.data.dutyJichu;
               console.log(this.dutyJichu)
               this.dutyYiban = response.data.data.dutyYiban;
+              this.dutyZhongdian = response.data.data.dutyZhongdian;
+              this.dutyMubiao = response.data.data.dutyMubiao;
               this.historyTotal = response.data.data.total;
             } else {
               this.$message({
@@ -382,13 +478,13 @@ export default {
         } else {
           if (!isNaN(val.score)) {
             if (val.score > 4 || val.score < 1) {
-              this.$message.warning("基础量化指标请填写1-4之间数字");
+              this.$message.warning("基础指标请填写1-4之间数字");
               return false;
             }
             totalScore += parseInt(val.score);
             scoreArr.push(val.score);
           } else {
-            this.$message.warning("基础量化指标请填写正确数字");
+            this.$message.warning("基础指标请填写正确数字");
           }
         }
       }
@@ -400,13 +496,49 @@ export default {
         } else {
           if (!isNaN(val.score)) {
             if (val.score > 16 || val.score < 1) {
-              this.$message.warning("关键量化指标请填写1-16之间数字");
+              this.$message.warning("岗位职责请填写1-16之间数字");
               return false;
             }
             totalScore += parseInt(val.score);
             scoreArr.push(val.score);
           } else {
-            this.$message.warning("关键量化指标请填写正确数字");
+            this.$message.warning("岗位职责请填写正确数字");
+          }
+        }
+      }
+      for (let i = 0; i < this.dutyZhongdian.length; i++) {
+        let val = this.dutyZhongdian[i];
+        if (!val.score) {
+          this.$message.warning("请先打完分数");
+          return false;
+        } else {
+          if (!isNaN(val.score)) {
+            if (val.score > 4 || val.score < 1) {
+              this.$message.warning("重点任务请填写1-4之间数字");
+              return false;
+            }
+            totalScore += parseInt(val.score);
+            scoreArr.push(val.score);
+          } else {
+            this.$message.warning("重点任务请填写正确数字");
+          }
+        }
+      }
+      for (let i = 0; i < this.dutyMubiao.length; i++) {
+        let val = this.dutyMubiao[i];
+        if (!val.score) {
+          this.$message.warning("请先打完分数");
+          return false;
+        } else {
+          if (!isNaN(val.score)) {
+            if (val.score > 4 || val.score < 1) {
+              this.$message.warning("目标任务请填写1-4之间数字");
+              return false;
+            }
+            totalScore += parseInt(val.score);
+            scoreArr.push(val.score);
+          } else {
+            this.$message.warning("目标任务请填写正确数字");
           }
         }
       }
@@ -435,8 +567,12 @@ export default {
                 this.form = response.data.data.stations;
                 this.dutyJichu = [];
                 this.dutyYiban = [];
+                this.dutyZhongdian = [];
+                this.dutyMubiao = [];
                 this.dutyJichu = response.data.data.dutyJichu;
                 this.dutyYiban = response.data.data.dutyYiban;
+                this.dutyZhongdian = response.data.data.dutyZhongdian;
+                this.dutyMubiao = response.data.data.dutyMubiao;
                 this.historyTotal = response.data.data.total;
               } else {
                 this.$message({
@@ -471,14 +607,24 @@ export default {
         //遍历基础和关键打分数据
         data.dutyJiChu = [];
         data.dutyYiban = [];
+        data.dutyZhongdian = [];
+        data.dutyMubiao = [];
         this.dutyJichu.forEach(row => {
           data.dutyJiChu.push({ topicId: row.dutycode, score: row.score });
         });
         this.dutyYiban.forEach(row => {
           data.dutyYiban.push({ topicId: row.dutycode, score: row.score });
         });
+        this.dutyZhongdian.forEach(row => {
+          data.dutyZhongdian.push({ topicId: row.dutycode, score: row.score });
+        });
+        this.dutyMubiao.forEach(row => {
+          data.dutyMubiao.push({ topicId: row.dutycode, score: row.score });
+        });
         data.dutyJiChu = JSON.stringify(data.dutyJiChu);
         data.dutyYiban = JSON.stringify(data.dutyYiban);
+        data.dutyZhongdian = JSON.stringify(data.dutyZhongdian);
+        data.dutyMubiao = JSON.stringify(data.dutyMubiao);
         data.month = this.detailData.month;
         data.year =this.detailData.year;
         new Promise((response, reject) => {

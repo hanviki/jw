@@ -66,15 +66,14 @@
         <el-button
           type="primary"
           @click="manual"
-          v-if="state == 2"
           :loading="manualLoading"
-        >开启手动考核</el-button>
-        <el-button
+        >开启下一个月考核</el-button>
+        <!-- <el-button
           v-if="state == 1"
           type="primary"
           @click="automation"
           :loading="manualLoading"
-        >开启自动考核</el-button>
+        >开启自动考核</el-button> -->
       </el-col>
       <el-table
         :data="tableData"
