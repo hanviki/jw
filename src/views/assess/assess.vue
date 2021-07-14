@@ -24,7 +24,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item label="季度">
+            <el-form-item label="评分月">
               <el-select
                 v-model="search.month"
                 filterable
@@ -72,7 +72,7 @@
           </li>
           <li>
             <div class="label">月度:</div>
-            <div class="value">第{{detailData.month}}季度</div>
+            <div class="value">第{{detailData.month}}月</div>
           </li>
           <!-- <li>
             <div class="label">照片:</div>
@@ -149,7 +149,7 @@
             </div>
           </li>
           <li class="li-title">
-            <div class="title">岗位职责(总分15)</div>
+            <div class="title">岗位职责(总分20)</div>
           </li>
           <li
             v-for="(item,index) in dutyYiban"
@@ -205,7 +205,7 @@
             </div>
           </li>
           <li class="li-title">
-            <div class="title">目标任务(总分30)</div>
+            <div class="title">目标任务(总分25)</div>
           </li>
           <li
             v-for="(item,index) in dutyMubiao"
@@ -236,7 +236,7 @@
             class="w100 operation"
             v-if="detailData.isedit == 1 ? false : true"
           >
-            <div v-if="dutyJichu.length == 0 && dutyJichu.length == 0">
+            <div v-if="dutyJichu.length == 0 && dutyJichu.length == 0 && dutyZhongdian.length == 0 && dutyMubiao.length == 0">
               <el-button
                 type="default"
                 disabled="disabled"
@@ -466,6 +466,114 @@ export default {
           });
       });
     },
+    getMaxMin (obj) {
+      // 优秀ascore,良好bscore,一般cscore,较差dscore,填入score
+      let yx = 0,lh = 0,yb = 0,jc = 0,yx1 = -100,lh1 = -100,yb1 = -100,jc1 = -100;
+      let arScore = [];
+      debugger
+      if (obj.ascore != "" && obj.ascore != null && obj.ascore != undefined) {
+        if (isNaN(obj.ascore)) {
+          arScore= obj.ascore.split('-');
+          if (arScore.length >= 2) {
+            yx = arScore[0];
+            yx1 = arScore[1];
+          } 
+          if (arScore.length == 1) {
+            yx = arScore[0];
+          }
+        } else {
+          yx = obj.ascore;
+        }
+      } else {
+        yx = -100
+      }
+      arScore = [];
+      if (obj.bscore != "" && obj.bscore != null && obj.bscore != undefined) {
+        if (isNaN(obj.bscore)) {
+          arScore = obj.bscore.split('-');
+          if (arScore.length >= 2) {
+            lh = arScore[0];
+            lh1 = arScore[1];
+          } 
+          if (arScore.length == 1) {
+            lh = arScore[0];
+          }
+        } else {
+          lh = obj.bscore;
+        }
+      } else {
+        lh = -100
+      }
+      arScore = [];
+      if (obj.cscore != "" && obj.cscore != null && obj.cscore != undefined) {
+        if (isNaN(obj.cscore)) {
+          arScore = obj.cscore.split('-');
+          if (arScore.length >= 2) {
+            yb = arScore[0];
+            yb1 = arScore[1];
+          } 
+          if (arScore.length == 1) {
+            yb = arScore[0];
+          }
+        } else {
+          yb = obj.cscore;
+        }
+      } else {
+        yb = -100
+      }
+      arScore = [];
+      if (obj.dscore != "" && obj.dscore != null && obj.dscore != undefined) {
+        if (isNaN(obj.dscore)) {
+          arScore = obj.dscore.split('-');
+          if (arScore.length >= 2) {
+            jc = arScore[0];
+            jc1 = arScore[1];
+          } 
+          if (arScore.length == 1) {
+            jc = arScore[0];
+          }
+        } else {
+          jc = obj.dscore;
+        }
+      } else {
+        jc = -100
+      }
+      arScore = []
+      if (yx >= 0) {
+        arScore.push(yx);
+      }
+      if (yx1 >= 0) {
+        arScore.push(yx1);
+      }
+      if (lh >= 0) {
+        arScore.push(lh);
+      }
+      if (lh1 >= 0) {
+        arScore.push(lh1);
+      }
+      if (yb >= 0) {
+        arScore.push(yb);
+      }
+      if (yb1 >= 0) {
+        arScore.push(yb1);
+      }
+      if (jc >= 0) {
+        arScore.push(jc);
+      }
+      if (jc1 >= 0) {
+        arScore.push(jc1);
+      }
+      if (arScore.length > 1) {
+        let maxN = Math.max.apply(null,arScore);
+        let minN = Math.min.apply(null,arScore);
+        arScore = [];
+        arScore.push(minN);
+        arScore.push(maxN);
+      } else {
+        arScore = [];
+      }
+      return arScore;
+    },
     //计算总分
     compute() {
       let totalScore = 0;
@@ -477,12 +585,20 @@ export default {
           return false;
         } else {
           if (!isNaN(val.score)) {
-            if (val.score > 4 || val.score < 1) {
-              this.$message.warning("基础指标请填写1-4之间数字");
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("基础指标请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("基础指标在创建指标时,设置有误.");
               return false;
             }
-            totalScore += parseInt(val.score);
-            scoreArr.push(val.score);
           } else {
             this.$message.warning("基础指标请填写正确数字");
           }
@@ -495,12 +611,20 @@ export default {
           return false;
         } else {
           if (!isNaN(val.score)) {
-            if (val.score > 16 || val.score < 1) {
-              this.$message.warning("岗位职责请填写1-16之间数字");
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("岗位职责请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("岗位职责在创建指标时,设置有误.");
               return false;
             }
-            totalScore += parseInt(val.score);
-            scoreArr.push(val.score);
           } else {
             this.$message.warning("岗位职责请填写正确数字");
           }
@@ -513,12 +637,20 @@ export default {
           return false;
         } else {
           if (!isNaN(val.score)) {
-            if (val.score > 4 || val.score < 1) {
-              this.$message.warning("重点任务请填写1-4之间数字");
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("重点任务请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("重点任务在创建指标时,设置有误.");
               return false;
             }
-            totalScore += parseInt(val.score);
-            scoreArr.push(val.score);
           } else {
             this.$message.warning("重点任务请填写正确数字");
           }
@@ -531,12 +663,132 @@ export default {
           return false;
         } else {
           if (!isNaN(val.score)) {
-            if (val.score > 4 || val.score < 1) {
-              this.$message.warning("目标任务请填写1-4之间数字");
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("目标任务请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("目标任务在创建指标时,设置有误.");
               return false;
             }
-            totalScore += parseInt(val.score);
-            scoreArr.push(val.score);
+          } else {
+            this.$message.warning("目标任务请填写正确数字");
+          }
+        }
+      }
+      this.scoreShow = true;
+      this.totalScore = totalScore;
+      return true;
+    },
+    //计算总分
+    compute() {
+      let totalScore = 0;
+      let scoreArr = [];
+      for (let i = 0; i < this.dutyJichu.length; i++) {
+        let val = this.dutyJichu[i];
+        if (!val.score) {
+          this.$message.warning("请先打完分数");
+          return false;
+        } else {
+          if (!isNaN(val.score)) {
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("基础指标请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("基础指标在创建指标时,设置有误.");
+              return false;
+            }
+          } else {
+            this.$message.warning("基础指标请填写正确数字");
+          }
+        }
+      }
+      for (let i = 0; i < this.dutyYiban.length; i++) {
+        let val = this.dutyYiban[i];
+        if (!val.score) {
+          this.$message.warning("请先打完分数");
+          return false;
+        } else {
+          if (!isNaN(val.score)) {
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("岗位职责请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("岗位职责在创建指标时,设置有误.");
+              return false;
+            }
+          } else {
+            this.$message.warning("岗位职责请填写正确数字");
+          }
+        }
+      }
+      for (let i = 0; i < this.dutyZhongdian.length; i++) {
+        let val = this.dutyZhongdian[i];
+        if (!val.score) {
+          this.$message.warning("请先打完分数");
+          return false;
+        } else {
+          if (!isNaN(val.score)) {
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("重点任务请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("重点任务在创建指标时,设置有误.");
+              return false;
+            }
+          } else {
+            this.$message.warning("重点任务请填写正确数字");
+          }
+        }
+      }
+      for (let i = 0; i < this.dutyMubiao.length; i++) {
+        let val = this.dutyMubiao[i];
+        if (!val.score) {
+          this.$message.warning("请先打完分数");
+          return false;
+        } else {
+          if (!isNaN(val.score)) {
+            let arScore = this.getMaxMin(val)
+            if (arScore.length == 2) {
+              let min = arScore[0];
+              let max = arScore[1];
+              if (val.score > max || val.score < min) {
+                this.$message.warning("目标任务请填写"+ min +"-"+max+"之间数字");
+                return false;
+              }
+              totalScore += parseInt(val.score);
+              scoreArr.push(val.score);
+            } else {
+              this.$message.warning("目标任务在创建指标时,设置有误.");
+              return false;
+            }
           } else {
             this.$message.warning("目标任务请填写正确数字");
           }
@@ -549,7 +801,7 @@ export default {
     //历史查询
     historySearch() {
       if (!this.search.year || !this.search.month) {
-        this.$message.warning("请选择年份和季度后在搜索");
+        this.$message.warning("请选择年份和月份后在搜索");
         return;
       }
       this.searchLoading = true;

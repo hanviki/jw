@@ -33,6 +33,22 @@ export function queryByUser(data) {
         data: data
     })
 }
+//考核列表
+export function getScoreFlow(data) {
+    return fetch({
+        url: 'homepage/getScoreFlow',
+        method: 'post',
+        data: data
+    })
+}
+//考核计算
+export function JiSuan(data) {
+    return fetch({
+        url: 'homepage/jisuanScore',
+        method: 'post',
+        data: data
+    })
+}
 //个人评分列表
 export function selfGetList(data) {
     return fetch({

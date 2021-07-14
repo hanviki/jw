@@ -185,28 +185,80 @@
           prop="ascore"
           show-overflow-tooltip
         >
+        <template slot-scope="scope">
+            <el-button
+              @click="lookAssess(scope.row,'A')"
+              type="text"
+              size="small"
+            >{{ scope.row.ascore }}</el-button>
+          </template>
         </el-table-column>
         <el-table-column
           label="B"
           prop="bscore"
           show-overflow-tooltip
         >
+        <template slot-scope="scope">
+            <el-button
+              @click="lookAssess(scope.row,'B')"
+              type="text"
+              size="small"
+            >{{ scope.row.bscore }}</el-button>
+          </template>
         </el-table-column>
         <el-table-column
           label="C"
           prop="cscore"
           show-overflow-tooltip
         >
+        <template slot-scope="scope">
+            <el-button
+              @click="lookAssess(scope.row,'C')"
+              type="text"
+              size="small"
+            >{{ scope.row.cscore }}</el-button>
+          </template>
         </el-table-column>
         <el-table-column
           label="D"
           prop="dscore"
           show-overflow-tooltip
         >
+        <template slot-scope="scope">
+            <el-button
+              @click="lookAssess(scope.row,'D')"
+              type="text"
+              size="small"
+            >{{ scope.row.dscore }}</el-button>
+          </template>
         </el-table-column>
         <el-table-column
           label="总分"
           prop="totalscore"
+          show-overflow-tooltip
+        >
+        </el-table-column>
+        <el-table-column
+          label="重点"
+          prop="sumZdScore"
+          show-overflow-tooltip
+        >
+        </el-table-column>
+        <el-table-column
+          label="目标"
+          prop="sumMbScore"
+          show-overflow-tooltip
+        >
+        </el-table-column>
+        <el-table-column
+          label="平均重点"
+          prop="avgZdScore"
+          show-overflow-tooltip
+        >
+        </el-table-column>
+        <el-table-column
+          label="平均目标"
+          prop="avgMbScore"
           show-overflow-tooltip
         >
         </el-table-column>
@@ -243,6 +295,11 @@
       @childClose="childClose"
       @childGetList="getList"
     ></AddQuarter>
+    <AssessLook
+      @childClose="lookCancel"
+      :swDialogVisible="swDialogVisible"
+      :parentForms="setForm"
+    ></AssessLook>
     <!-- 一键导出未评分和未完成用户 -->
     <el-dialog
       title="一键导出未评分和未完成用户"
@@ -302,6 +359,7 @@
 import PostList from "../common/postList";
 import { getList } from "@/api/score/history";
 import AddQuarter from "../user/addQuarter";
+import AssessLook from "../common/assessLook";
 import qs from "qs";
 export default {
   data() {
@@ -413,6 +471,8 @@ export default {
       fullstationcode: [""],
       tableLoading: true,
       dialogVisible: false,
+      setForm: {},
+      swDialogVisible: false,
       forms: {},
       searchLoading: false,
       notDialogVisible:false,
@@ -425,6 +485,7 @@ export default {
   components: {
     PostList,
     AddQuarter,
+    AssessLook,
   },
   mounted() {},
   created() {
@@ -445,6 +506,15 @@ export default {
         filename: row.filename,
       };
       this.dialogVisible = true;
+    },
+    lookCancel(val){
+      this.setForm = {}
+      this.swDialogVisible = val;
+    },
+    lookAssess(row,scoreType) {
+      row.scoreType = scoreType;
+      this.setForm = row;
+      this.swDialogVisible = true;
     },
     //初始化
     into() {

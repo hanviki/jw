@@ -5,7 +5,7 @@
       <p>暂未生成个人评估报告</p>
     </el-row>
     <el-row v-else>
-      <el-col class="title">武汉市精神卫生中心360°考核系统{{detailData.year}}年第{{detailData.month}}季度个人评估报告</el-col>
+      <el-col class="title">武汉市精神卫生中心360°考核系统{{detailData.year}}年第{{detailData.month}}月份个人评估报告</el-col>
 
       <el-col class="top">
         <el-col
@@ -52,8 +52,8 @@
         <el-col class="list">
           <el-col class="line">总得分<span class="count">{{detailData.totalscore}}</span></el-col>
           <el-col class="on-line-top message">
-            <span  v-if="detailData.totalcomparelast >= 0">较上一季度提升<span class="green">{{detailData.totalcomparelast}}%</span></span>
-            <span  v-else>较上一季度差距<span class="red">{{Math.abs(detailData.totalcomparelast)}}%</span></span>
+            <span  v-if="detailData.totalcomparelast >= 0">较上一月份提升<span class="green">{{detailData.totalcomparelast}}%</span></span>
+            <span  v-else>较上一月份差距<span class="red">{{Math.abs(detailData.totalcomparelast)}}%</span></span>
             <span v-if="detailData.totalcomparemark >= 0">较整体平均分超越<span class="green">{{detailData.totalcomparemark}}%</span></span>
             <span v-else>较整体平均分差距<span class="red">{{Math.abs(detailData.totalcomparemark)}}%</span></span>
           </el-col>
@@ -61,8 +61,8 @@
         <el-col class="list">
           <el-col class="line">最高分<span class="count">{{detailData.maxscore}}</span></el-col>
           <el-col class="on-line-top message">
-            <span v-if="detailData.maxcomparelast >= 0">较上一季度提升<span class="green">{{detailData.maxcomparelast}}%</span> </span>
-            <span v-else>较上一季度差距<span class="red">{{Math.abs(detailData.maxcomparelast)}}%</span></span>
+            <span v-if="detailData.maxcomparelast >= 0">较上一月份提升<span class="green">{{detailData.maxcomparelast}}%</span> </span>
+            <span v-else>较上一月份差距<span class="red">{{Math.abs(detailData.maxcomparelast)}}%</span></span>
             <span v-if="detailData.maxcomparemark >= 0">较最高平均分超越<span class="green">{{detailData.maxcomparemark}}%</span></span>
             <span v-else>较最高平均分差距<span class="red">{{Math.abs(detailData.maxcomparemark)}}%</span></span>
           </el-col>
@@ -70,8 +70,8 @@
         <el-col class="list">
           <el-col class="line">最低分<span class="count">{{detailData.minscore}}</span></el-col>
           <el-col class="on-line-top message">
-            <span v-if="detailData.mincomparelast >= 0">较上一季度提升<span class="green">{{detailData.mincomparelast}}%</span></span>
-            <span v-else>较上一季度差距<span class="green">{{Math.abs(detailData.mincomparelast)}}%</span> </span>
+            <span v-if="detailData.mincomparelast >= 0">较上一月份提升<span class="green">{{detailData.mincomparelast}}%</span></span>
+            <span v-else>较上一月份差距<span class="green">{{Math.abs(detailData.mincomparelast)}}%</span> </span>
             <span v-if="detailData.mincomparemark >= 0">较最低平均分超越<span class="green">{{detailData.mincomparemark}}%</span></span>
             <span v-else>较最低平均分差距<span class="red">{{Math.abs(detailData.mincomparemark)}}%</span></span>
           </el-col>

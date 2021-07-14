@@ -75,8 +75,21 @@
         >批量修改月结评分完成</el-button>
         <el-button
           type="warning"
+          @click="updateAllStatus"
+        >全部月结评分</el-button>
+        <el-button
+          type="warning"
           @click="gradeAllFinish"
         >全部月结评分完成</el-button>
+           <el-button
+          type="primary"
+          @click="manual"
+          :loading="manualLoading"
+        >开启下一个月考核</el-button>
+        <el-button
+          type="warning"
+          @click="jisuanChang"
+        >计算</el-button>
         <!-- <el-button type="danger">汇总</el-button> -->
       </el-col>
       <el-table
@@ -114,6 +127,14 @@
           label="所属岗位"
           show-overflow-tooltip
         >
+        </el-table-column>
+        <el-table-column
+          label="评分月份"
+          show-overflow-tooltip
+        >
+          <template slot-scope="scope">
+            {{scope.row.year}}-{{scope.row.month}}
+          </template>
         </el-table-column>
         <el-table-column
           label="月结状态"
@@ -196,6 +217,38 @@
       @childClose="childClose"
       @childGetList="getList"
     ></AddQuarter>
+     <!-- 开启时间选择框 -->
+    <el-dialog
+      title="提示"
+      :visible.sync="timeDialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <el-form
+        ref="form"
+        label-width="80px"
+      >
+        <el-form-item label="开启时间">
+          <el-date-picker
+            v-model="startTime"
+            type="datetime"
+            placeholder="选择日期时间"
+            value-format="yyyy-MM-dd HH:mm:ss"
+          >
+          </el-date-picker>
+        </el-form-item>
+      </el-form>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button @click="timeDialogVisible = false">取 消</el-button>
+        <el-button
+          type="primary"
+          @click="submitManual"
+        >确 定</el-button>
+      </span>
+    </el-dialog>
     <!-- 修改状态 -->
     <el-dialog
       title="修改状态"
@@ -237,8 +290,9 @@ import {
   updateFinishGradeBySerialNo,
   updateFinishGradeAll
 } from "@/api/score/gradeTotal";
-import { updateSummaryGradeState } from "@/api/score/quarter";
+import { updateSummaryGradeState, isAllFinish, openManualAssessment, } from "@/api/score/quarter";
 import { updateStateBySerialNo } from "@/api/user/quarter";
+import { JiSuan } from "@/api/home/home";
 import AddQuarter from "../user/addQuarter";
 import qs from "qs";
 export default {
@@ -312,6 +366,9 @@ export default {
       tempStatusRow: {},
       forms: {},
       searchLoading:false,
+      manualLoading: false,
+      timeDialogVisible: false,
+      startTime: "",
     };
   },
   components: {
@@ -377,6 +434,42 @@ export default {
             reject(error);
           });
       });
+    },
+     jisuanChang() {
+      this.$confirm(
+        "此操作将计算 重点、目标 指标的平均值, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      )
+        .then(() => {
+          let params = {}
+          new Promise((response, reject) => {
+            JiSuan(qs.stringify(params))
+              .then(response => {
+                if (response.data.code == 0) {
+                  this.$message({
+                    message: response.data.msg,
+                    type: "success"
+                  });
+                } else {
+                  this.$message({
+                    message: response.data.msg,
+                    type: "error"
+                  });
+                }
+                this.tableLoading = false;
+                this.searchLoading = false;
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+        })
+        .catch(() => {});
     },
     //获取岗位选择
     getSelectStation(data, row) {
@@ -480,6 +573,97 @@ export default {
           });
         })
         .catch(() => {});
+    },
+     //全部月结评分
+    updateAllStatus() {
+      this.$confirm("此操作将所有人月结状态改成月结评分, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          new Promise((response, reject) => {
+            updateSummaryGradeStateAll()
+              .then(response => {
+                if (response.data.code == 0) {
+                  this.$message({
+                    message: response.data.msg,
+                    type: "success"
+                  });
+                  this.getList();
+                  // this.into();
+                } else {
+                  this.$message({
+                    message: response.data.msg,
+                    type: "error"
+                  });
+                }
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+        })
+        .catch(() => {});
+    },
+    //开启手动操作
+    submitManual() {
+      let data = {
+        time: this.startTime,
+        createmoneycard:this.$store.state.user.user.moneycard
+      };
+      new Promise((response, reject) => {
+        openManualAssessment(qs.stringify(data))
+          .then(response => {
+            if (response.data.code == 0) {
+              this.$message({
+                message: response.data.msg,
+                type: "success"
+              });
+              this.state = 1;
+              localStorage.setItem("checkState", 1);
+              this.timeDialogVisible = false;
+              console.log(localStorage.getItem("checkState"));
+            } else {
+              this.$message({
+                message: response.data.msg,
+                type: "error"
+              });
+            }
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+      //请求手动操作
+    manual() {
+      this.manualLoading = true;
+      new Promise((response, reject) => {
+        isAllFinish()
+          .then(response => {
+            if (response.data.code == 0) {
+              this.$confirm(response.data.msg, "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning"
+              })
+                .then(() => {
+                  this.timeDialogVisible = true;
+                })
+                .catch(() => {});
+            } else {
+              this.$message({
+                message: response.data.msg,
+                type: "error"
+              });
+            }
+            this.manualLoading = false;
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
     },
     //批量修改月结评分完成
     gradeFinish() {

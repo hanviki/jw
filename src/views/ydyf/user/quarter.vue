@@ -30,7 +30,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="月度">
+            <el-form-item label="月份">
               <el-select
                 v-model="search.month"
                 clearable
@@ -82,7 +82,7 @@
         >
         </el-table-column>
         <el-table-column
-          label="月结月度"
+          label="月结月份"
           show-overflow-tooltip
         >
           <template slot-scope="scope">
@@ -161,19 +161,19 @@ export default {
       quarterOptions: [
         {
           value: "1",
-          label: "第一月度"
+          label: "第一月份"
         },
         {
           value: "2",
-          label: "第二月度"
+          label: "第二月份"
         },
         {
           value: "3",
-          label: "第三月度"
+          label: "第三月份"
         },
         {
           value: "4",
-          label: "第四月度"
+          label: "第四月份"
         }
       ],
       forms: {

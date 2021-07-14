@@ -18,7 +18,7 @@
             class="top-btn more"
             @click="choiceSystem(2)"
           >
-            <i class="icon iconfont icon-keyanxitong"></i>组织部考核
+            <i class="icon iconfont icon-keyanxitong"></i>干部考核
           </div>
         </el-col>
         <!-- <el-col

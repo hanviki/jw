@@ -1,7 +1,7 @@
 <template>
   <div class="main-content" v-if="isData==0">
     <el-row class="box-wrap">
-      <h2 class="title">{{detailData.year}}年第{{detailData.month}}季度测评报告</h2>
+      <h2 class="title">{{detailData.year}}年第{{detailData.month}}月份测评报告</h2>
       <el-col :span="16">
         <h4>{{detailData.username}}<span>{{detailData.departmentname}}（{{detailData.stationname}}）</span></h4>
         <el-col :span="2">
@@ -30,8 +30,8 @@
             <span style="margin-left:0;">总得分：</span>
             {{detailData.totalscore}}<span class="icon">分</span>
             <!--<span class="level good">优</span>-->
-            <span v-if="detailData.totalcomparelast >= 0"> 较上一季度提升<span class="up"><i class="el-icon-top"></i>{{detailData.totalcomparelast}}%</span></span>
-            <span v-else>较上一季度差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.totalcomparelast)}}%</span></span>
+            <span v-if="detailData.totalcomparelast >= 0"> 较上一月份提升<span class="up"><i class="el-icon-top"></i>{{detailData.totalcomparelast}}%</span></span>
+            <span v-else>较上一月份差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.totalcomparelast)}}%</span></span>
             <span v-if="detailData.totalcomparemark >= 0">较整体平均分超越<span class="up"><i class="el-icon-top"></i>{{detailData.totalcomparemark}}%</span></span>
             <span v-else>较整体平均分差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.totalcomparemark)}}%</span></span>
           </h4>
@@ -39,8 +39,8 @@
             <span style="margin-left:0;">最高分：</span>
             {{detailData.maxscore}}<span class="icon">分</span>
             <!--<span class="level good">优</span>-->
-            <span v-if="detailData.maxcomparelast >= 0"> 较上一季度提升<span class="up"><i class="el-icon-top"></i>{{detailData.maxcomparelast}}%</span></span>
-            <span v-else>较上一季度差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.maxcomparelast)}}%</span></span>
+            <span v-if="detailData.maxcomparelast >= 0"> 较上一月份提升<span class="up"><i class="el-icon-top"></i>{{detailData.maxcomparelast}}%</span></span>
+            <span v-else>较上一月份差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.maxcomparelast)}}%</span></span>
             <span v-if="detailData.maxcomparemark >= 0">较最高平均分超越<span class="up"><i class="el-icon-top"></i>{{detailData.maxcomparemark}}%</span></span>
             <span v-else>较最高平均分差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.maxcomparemark)}}%</span></span>
           </h4>
@@ -48,8 +48,8 @@
             <span style="margin-left:0;">最低分：</span>
             {{detailData.minscore}}<span class="icon">分</span>
             <!--<span class="level good">优</span>-->
-            <span v-if="detailData.mincomparelast >= 0"> 较上一季度提升<span class="up"><i class="el-icon-top"></i>{{detailData.mincomparelast}}%</span></span>
-            <span v-else>较上一季度差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.mincomparelast)}}%</span></span>
+            <span v-if="detailData.mincomparelast >= 0"> 较上一月份提升<span class="up"><i class="el-icon-top"></i>{{detailData.mincomparelast}}%</span></span>
+            <span v-else>较上一月份差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.mincomparelast)}}%</span></span>
             <span v-if="detailData.mincomparemark >= 0">较最低平均分超越<span class="up"><i class="el-icon-top"></i>{{detailData.mincomparemark}}%</span></span>
             <span v-else>较最低平均分差距<span class="down"><i class="el-icon-bottom"></i>{{Math.abs(detailData.mincomparemark)}}%</span></span>
           </h4>

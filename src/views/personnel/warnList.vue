@@ -132,7 +132,7 @@
         </el-table-column>
         <el-table-column
           prop="month"
-          label="季度"
+          label="月份"
           show-overflow-tooltip
         >
         </el-table-column>
@@ -290,18 +290,18 @@ export default {
           });
       });
     },
-    //打开提醒用户年分季度选择框
+    //打开提醒用户年分月份选择框
     warnUser() {
       this.dialogVisible = true;
     },
-    //确定选择年份季度
+    //确定选择年份月份
     warnList() {
       if (!this.warn.year) {
         this.$message.warning("请选择年份");
         return;
       }
       if (!this.warn.month) {
-        this.$message.warning("请选择季度");
+        this.$message.warning("请选择月份");
         return;
       }
       this.$router.push({

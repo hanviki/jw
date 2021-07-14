@@ -265,7 +265,7 @@ export default new Router({
     },
     {
         path: '/webShow',
-        name: "协和医院考核问卷",
+        name: "医院考核问卷",
         component: webShow,
     },
     {
@@ -275,12 +275,12 @@ export default new Router({
     },
     {
         path: '/webShowLogin',
-        name: "协和医院考核问卷登录",
+        name: "医院考核问卷登录",
         component: webShowLogin,
     },
     {
         path: '/webShowQuestion',
-        name: "协和考核个人评估报告",
+        name: "考核个人评估报告",
         component: webShowQuestion,
     },
     {
@@ -300,11 +300,12 @@ export default new Router({
             path: 'post',
             name: "岗位管理",
             component: post
-        }, {
-            path: 'branch',
-            name: "支部管理",
-            component: branch
         },
+        //  {
+        //     path: 'branch',
+        //     name: "支部管理",
+        //     component: branch
+        // },
         {
             path: 'indicator',
             name: "指标管理",
@@ -335,11 +336,13 @@ export default new Router({
             path: 'historyGrade',
             name: "历史评分汇总",
             component: historyGrade
-        }, {
-            path: 'quarter',
-            name: "月度总结管理",
-            component: quarter
-        }, {
+        }
+        // , {
+        //     path: 'quarter',
+        //     name: "月度评分管理",
+        //     component: quarter
+        // }
+        , {
             path: 'leaderUser',
             name: "打分用户管理",
             component: leaderUser

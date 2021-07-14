@@ -1,7 +1,7 @@
 import fetch from '@/utils/fetch'
 
 
-//查询个人季节总结接口
+//查询个人月份总结接口
 export function getList(data) {
     return fetch({
         url: 'monthsummary/list',
@@ -9,7 +9,7 @@ export function getList(data) {
         data: data
     })
 }
-//添加个人季节总结接口
+//添加个人月份总结接口
 export function addQuarter(data) {
     return fetch({
         url: 'monthsummary/add',
@@ -17,7 +17,7 @@ export function addQuarter(data) {
         data: data
     })
 }
-//修改个人季节总结接口
+//修改个人月份总结接口
 export function updateQuarter(data) {
     return fetch({
         url: 'monthsummary/update',
@@ -33,7 +33,7 @@ export function uploadFile(data) {
         data: data
     })
 }
-//评分汇总修改个人季节总结接口
+//评分汇总修改个人月份总结接口
 export function updateStateBySerialNo(data) {
     return fetch({
         url: 'quarter/updateStateBySerialNo',

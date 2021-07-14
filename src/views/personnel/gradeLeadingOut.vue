@@ -19,7 +19,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="季度">
+            <el-form-item label="月份">
               <el-select
                 v-model="search.month"
                 clearable
@@ -64,7 +64,7 @@
               ><i class="icon iconfont icon-daochu-tianchong"></i>导出excel</el-button>
             </el-form-item>
             <el-form-item class="notice">
-              <span>友情提示：搜索框的年份和季度都为空就是查询全部数据</span>
+              <span>友情提示：搜索框的年份和月份都为空就是查询全部数据</span>
             </el-form-item>
           </el-col>
         </el-form>
@@ -109,7 +109,7 @@
         </el-table-column>
         <el-table-column
           prop="month"
-          label="季度"
+          label="月份"
           show-overflow-tooltip
         >
         </el-table-column>
@@ -141,21 +141,55 @@ export default {
   data() {
     return {
       quarterOptions: [
-        {
+         {
           value: "1",
-          label: "第一季度"
+          label: "1月"
         },
         {
           value: "2",
-          label: "第二季度"
+          label: "2月"
         },
         {
           value: "3",
-          label: "第三季度"
+          label: "3月"
         },
         {
           value: "4",
-          label: "第四季度"
+          label: "4月"
+        },
+        {
+          value: "5",
+          label: "5月"
+        }
+        ,
+        {
+          value: "6",
+          label: "6月"
+        }
+        ,
+        {
+          value: "7",
+          label: "7月"
+        },
+        {
+          value: "8",
+          label: "8月"
+        },
+        {
+          value: "9",
+          label: "9月"
+        },
+        {
+          value: "10",
+          label: "10月"
+        },
+        {
+          value: "11",
+          label: "11月"
+        },
+        {
+          value: "12",
+          label: "12月"
         }
       ],
       title: "",

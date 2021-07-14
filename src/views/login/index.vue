@@ -403,13 +403,13 @@ export default {
     //手动考核提示
     manualNotice(state, time) {
       //判断是否是手动考核给出提示
-      if (state == 1) {
-        this.$notify({
-          title: "友情提示",
-          message: "当前组织部考核开启时间改为:" + time,
-          type: "warning",
-        });
-      }
+      // if (state == 1) {
+      //   this.$notify({
+      //     title: "友情提示",
+      //     message: "当前组织部考核开启时间改为:" + time,
+      //     type: "warning",
+      //   });
+      // }
     },
     //找回密码
     getBack() {

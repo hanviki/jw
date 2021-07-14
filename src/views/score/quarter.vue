@@ -60,10 +60,6 @@
           @click="updateAllStatus"
         >全部月结评分</el-button>
         <el-button
-          type="danger"
-          @click="openMessage(1)"
-        >一键短信提醒所有人</el-button>
-        <el-button
           type="primary"
           @click="manual"
           :loading="manualLoading"

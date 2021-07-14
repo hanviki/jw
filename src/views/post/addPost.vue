@@ -52,12 +52,12 @@
         <el-form-item label="工作经验">
           <el-input v-model="form.gongzuojingyan"></el-input>
         </el-form-item>
-          <el-form-item label="关键知识">
+          <el-form-item label="关键知识核心技能">
           <el-input v-model="form.gexingtezheng"></el-input>
         </el-form-item>
-          <el-form-item label="核心技能">
+          <!-- <el-form-item label="核心技能">
           <el-input v-model="form.jibenjineng"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="岗位描述">
           <!-- <el-input
             type="textarea"

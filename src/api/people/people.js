@@ -19,6 +19,15 @@ export function addUser(data) {
     })
 }
 
+//考核用户列表
+export function getUserByScoreFlow(data) {
+    return fetch({
+        url: 'user/getUserByScoreFlow',
+        method: 'post',
+        data: data
+    })
+}
+
 //修改人员
 export function updateUser(data) {
     return fetch({

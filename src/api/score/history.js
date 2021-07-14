@@ -1,7 +1,7 @@
 import fetch from '@/utils/fetch'
 
 
-//查询季节总结接口
+//查询月份总结接口
 export function getList(data) {
     return fetch({
         url: 'history/list',

@@ -48,7 +48,7 @@
         </el-table-column>
         <el-table-column
           prop="monthname"
-          label="绩效季度"
+          label="绩效月份"
           show-overflow-tooltip
           width="150px"
         >
@@ -106,21 +106,55 @@ export default {
   data() {
     return {
       quarterOptions: [
-        {
-          value: "第一季度",
-          label: "第一季度"
+         {
+          value: "1月",
+          label: "1月"
         },
         {
-          value: "第二季度",
-          label: "第二季度"
+          value: "2月",
+          label: "2月"
         },
         {
-          value: "第三季度",
-          label: "第三季度"
+          value: "3月",
+          label: "3月"
         },
         {
-          value: "第四季度",
-          label: "第四季度"
+          value: "4月",
+          label: "4月"
+        },
+        {
+          value: "5月",
+          label: "5月"
+        }
+        ,
+        {
+          value: "6月",
+          label: "6月"
+        }
+        ,
+        {
+          value: "7月",
+          label: "7月"
+        },
+        {
+          value: "8月",
+          label: "8月"
+        },
+        {
+          value: "9月",
+          label: "9月"
+        },
+        {
+          value: "10月",
+          label: "10月"
+        },
+        {
+          value: "11月",
+          label: "11月"
+        },
+        {
+          value: "12月",
+          label: "12月"
         }
       ],
       search: {

@@ -12,7 +12,7 @@
 
         <div class="question">
           <el-row>
-            <el-col class="title">精神卫生中心360°考核系统<br/>2019年一季度门诊办公室考核评估问卷</el-col>
+            <el-col class="title">精神卫生中心360°考核系统<br/>2019年一月份门诊办公室考核评估问卷</el-col>
             <el-col class="content">
               <el-col class="list">
                 <el-col class="question-title">
